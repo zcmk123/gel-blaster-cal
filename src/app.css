@@ -1,0 +1,16 @@
+.ant-input-number {
+  width: 100% !important;
+}
+
+.app {
+  margin-top: 20px;
+  padding: 0 20px;
+}
+
+.title {
+  text-align: center;
+}
+
+.cal-form {
+  max-width: 600px;
+}
