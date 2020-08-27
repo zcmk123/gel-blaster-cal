@@ -1,21 +1,22 @@
 import React from 'react';
 import WaveBell from 'wavebell';
 
+let currentValue;
+let buffer;
+let cursor = 0;
+const BUF_SIZE = 500;
+
 export default class App extends React.Component {
     canvasRef = React.createRef();
     canvasCtx;
 
     bell = new WaveBell();
-    currentValue = 0;
-
-    // buffered wave data
-    BUF_SIZE = 500;
-    buffer = new Array(this.BUF_SIZE).fill(0);
-    cursor = 0;
 
     constructor() {
         super();
 
+        buffer = new Array(BUF_SIZE).fill(0);
+        currentValue = 0;
         this.bell.start(1000 / 25);
 
         this.bell.on('wave', this.onWaveChange);
@@ -32,7 +33,7 @@ export default class App extends React.Component {
 
     updateBuffer() {
         // loop update buffered data
-        this.buffer[this.cursor++ % this.BUF_SIZE] = this.currentValue;
+        buffer[cursor++ % BUF_SIZE] = currentValue;
     }
 
     drawFrame() {
@@ -44,8 +45,8 @@ export default class App extends React.Component {
         ctx.fillRect(0, 0, 500, 150);
         // draw audio waveform
         ctx.strokeStyle = '#6c4';
-        for (var i = 0; i < this.BUF_SIZE; i++) {
-            var h = 250 * this.buffer[(this.cursor + i) % this.BUF_SIZE];
+        for (var i = 0; i < BUF_SIZE; i++) {
+            var h = 250 * buffer[(cursor + i) % BUF_SIZE];
             var x = i;
             ctx.beginPath();
             ctx.moveTo(x, 75.5 - 0.5 * h);
@@ -67,13 +68,16 @@ export default class App extends React.Component {
         });
         // update wave data
         this.updateBuffer();
+        // console.log(currentValue);
+
         // draw next frame
         this.drawFrame();
     }
 
     onWaveChange(e) {
         // update current wave value
-        this.currentValue = e.value;
+
+        currentValue = e.value;
     }
 
     render() {
