@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/gel-blaster-cal/precache-manifest.a8c146d2d4a3582d035d2994c569e5ea.js"
+  "/gel-blaster-cal/precache-manifest.984d11c7cc52acf1d98b44eb365c3bdb.js"
 );
 
 self.addEventListener('message', (event) => {
