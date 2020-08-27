@@ -2,9 +2,9 @@ import React from 'react';
 import AudioVisualizer from '../components/AudioVisualizer';
 
 export default class App extends React.Component {
-    constructor() {
-        super();
-    }
+    // constructor() {
+    //     super();
+    // }
 
     render() {
         return (
